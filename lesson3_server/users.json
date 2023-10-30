@@ -1,4 +1,4 @@
-{"users":[{"id":"99b28adf-38ff-4f32-8a14-55487fe42bac","name":"Naraa","status":"online","email":"naraa@gmail.com","department":"technology"},
-{"id":"485d517d-12c0-4819-8116-2d87c85be687","name":"Naraa","status":"online","email":"naraa@gmail.com","department":"technology"},
-{"id":"4999d8c1-010c-4b6f-8c66-94f3efeef07b","name":"Naraa","status":"online","email":"naraa@gmail.com","department":"technology"},
-{"id":"2adfe29f-2174-482f-b958-6f466772973a","name":"Naraa","status":"online","email":"naraa@gmail.com","department":"technology"}]}
+{"users":[
+    {"id":"1a79bb50-b086-45b4-b7b2-d9e414f7dbb8","name":"bat","status":"offline","email":"ochiroo75@gmail.com","department":"office"},
+    {"id":"e8c53670-a2b0-4617-9cfe-b16648215717","name":"otgoo","status":"online","email":"rotgontseren@gmail.com","department":"fullstack"},
+    {"id":"3b6c9e8f-a074-4be3-8f9e-657e10d0be0c","name":"saraa","status":"online","email":"saraa@gmail.com","department":"marketing"}]}
