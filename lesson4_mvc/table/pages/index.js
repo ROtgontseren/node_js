@@ -1,69 +1,51 @@
+import Thead from "@/components/UserList/thead";
+import Tbody from "@/components/UserList/tbody";
+import Form from "@/components/Form";
+import { useState, useEffect } from "react";
 
+export default function Home({users}) {
+    const [open, setOpen] = useState(false);
+    const [count, setCount] = useState(0);
+    const [refresh, setRefresh] = useState(false);
+    const [userList, setUserList] = useState([]);
 
-export default function Home() {
+    const closeForm = () => {
+         console.log("Formee");
+         setOpen(false);
+         setCount(5);
+         setRefresh(!refresh);
+  };
+
+    const getAllUser = async () => {
+    const { users } = await fetch("http://localhost:8008/api/users").then(
+          (res) => res.json()
+        );
+        setUserList(users);
+  };
+
+  useEffect(() => {
+    getAllUser();
+  }, [refresh]);
   return (
-    <main className="flex justify-center bg-slate-300 h-screen">
+    <main className="flex items-center bg-slate-300 h-screen flex-col">
+      <h1 className="text-center text-2xl font-bold my-4">
+        Хэрэглэгчийн жагсаалт
+      </h1> 
+      <div className=" m-5 flex justify-end">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Шинэ хэрэглэгч нэмэх {count}
+        </button>
+      </div>
+      <Form open={open} closeForm={closeForm} />
       <div class="mt-12 mb-12 border border-black rounded-2xl">
         <table class="table">
-             <thead>
-                <tr>
-                   <th>Зураг</th>
-                   <th>Овог нэр</th>
-                   <th>Төрсөн он сар</th>
-                   <th>Хэлтэс</th>
-                   <th className="w-[200px] flex justify-center">Үйлдэлүүд</th>
-                 </tr>
-             </thead>
-             <tbody>
-                <tr>
-                   <th>
-                       <div class="avatar">
-                           <div class="mask mask-squircle w-12 h-12">
-                                <img src="pablo.jpg"/>
-                           </div>
-                       </div>
-                   </th>
-                   <td>
-                       <div class="flex items-center space-x-3">
-                           <div>
-                               <div class="font-bold">Hart Hagerty</div>
-                           </div>
-                       </div>
-                   </td>
-                   <td>
-                       1976/12/12
-                   </td>
-                   <td>Purple</td>
-                   <th className="flex justify-evenly w-[200px]">
-                   <button class="btn btn-primary">  Put  </button>
-                   <button class="btn btn-error">Del</button>
-                   </th>
-                </tr>
-                <tr>
-                   <th>
-                       <div class="avatar">
-                           <div class="mask mask-squircle w-12 h-12">
-                                <img src="pablo.jpg"/>
-                           </div>
-                       </div>
-                   </th>
-                   <td>
-                       <div class="flex items-center space-x-3">
-                           <div>
-                               <div class="font-bold">Hart Hagerty</div>
-                           </div>
-                       </div>
-                   </td>
-                   <td>
-                       1976/12/12
-                   </td>
-                   <td>Purple</td>
-                   <th className="flex justify-evenly w-[200px]">
-                   <button class="btn btn-primary">  Put  </button>
-                   <button class="btn btn-error">Del</button>
-                   </th>
-                </tr>
-             </tbody>
+           <Thead/>
+           <Tbody users={userList}/>
         </table>
       </div>
     </main>

@@ -1,6 +1,7 @@
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
+const cors = require("cors");
 
 const { logger } = require("./middleware/logger");
 const userRoutes = require("./routes/userRoutes");
@@ -8,7 +9,9 @@ const userRoutes = require("./routes/userRoutes");
 const PORT = 8008;
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 app.use(logger);
 
 // api/users
