@@ -1,14 +1,18 @@
 import React from "react";
-import Trow from "./trow";
+import TRow from "./trow";
 
-const tbody = ({ users }) => {
+const TBody = ({ users, handleUpdate, handleDelete }) => {
   return (
     <tbody>
       {users.map((user) => (
-        <Trow user={user} />
+        <TRow
+          user={user}
+          handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
+        />
       ))}
     </tbody>
   );
 };
 
-export default tbody;
+export default TBody;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const trow = ({ user }) => {
+const TRow = ({ user, handleUpdate, handleDelete }) => {
   const getDepartment = (department) => {
     switch (department) {
       case "human resource": {
@@ -27,20 +27,18 @@ const trow = ({ user }) => {
     }
   };
   return (
-    <tr className="hover:bg-slate-400">
-      <th>
-        <div class="avatar">
-          <div class="mask mask-squircle w-12 h-12">
-            <img src={user.avatarUrl} alt={user.firstName} />
-          </div>
-        </div>
-      </th>
+    <tr className="hover:bg-slate-100">
       <td>
-        <div class="flex items-center space-x-3">
-          <div>
-            <span className="font-bold">{user.firstName}</span>
+        <div className="flex items-center space-x-3">
+          <div className="avatar">
+            <div className="mask mask-squircle w-12 h-12">
+              <img src={user.avatarUrl} alt={user.firstName} />
+            </div>
           </div>
         </div>
+      </td>
+      <td>
+        <span className="font-bold">{user.firstName}</span>
       </td>
       <td>
         <span className="font-bold">{user.lastName}</span>
@@ -52,12 +50,19 @@ const trow = ({ user }) => {
         <button className="btn btn-ghost btn-xs">{user.birthDate}</button>
       </td>
       <td>{getDepartment(user.department)}</td>
-      <th className="flex justify-evenly w-[200px]">
-        <button class="btn btn-primary"> Put </button>
-        <button class="btn btn-error">Del</button>
-      </th>
+      <td>
+        <button
+          className=" btn btn-warning  mx-2"
+          onClick={() => handleUpdate(user.id)}
+        >
+          засах
+        </button>
+        <button className="btn btn-error" onClick={() => handleDelete(user.id)}>
+          устгах
+        </button>
+      </td>
     </tr>
   );
 };
 
-export default trow;
+export default TRow;

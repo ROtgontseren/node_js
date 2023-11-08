@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const { readFile, writeFile } = require("../utils/fileHandler");
+const bcrypt = require("bcrypt");
 
 const getAllUser = (req, res) => {
   console.log("Get all `users");
@@ -23,20 +24,25 @@ const getUserById = (req, res) => {
       res.status(200).json({ message: "success", user: findUser[0] });
     }
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 const createUser = (req, res) => {
+  console.log("Create new user", req.body);
   try {
-    console.log("Create new user");
-    const newUser = { id: uuidv4(), ...req.body };
+    const newUser = {
+      id: uuidv4(),
+      ...req.body,
+      password: bcrypt.hashSync("pass123", 10),
+    };
+    bcrypt.compare;
     const users = readFile("users.json");
     users.push(newUser);
     writeFile("users.json", users);
     return res.status(201).json({ message: "success" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -57,7 +63,7 @@ const updateUserById = (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -75,7 +81,7 @@ const deleteUserById = (req, res) => {
       res.status(200).json({ message: `${userId} тай хэрэглэгч устгалаа.` });
     }
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
